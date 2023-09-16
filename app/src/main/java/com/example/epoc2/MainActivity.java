@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (calcula(valor1 ,valor2) >= 21 && calcula(valor1 ,valor2) <= 40) {
             textView2.setText(String.valueOf("Peligroso. Encerio, estas jodido, reduci el consumo."));
         } else {
-            textView2.setText(String.valueOf("Muy peligroso. Anda aprendiendo a tocar el arpa o baja el consumo"));
+            textView2.setText(String.valueOf("Muy mal. Anda aprendiendo a tocar el arpa o baja el consumo"));
         }
     }
 
