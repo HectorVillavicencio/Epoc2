@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         textNroAnio = findViewById(R.id.textNroAnio);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
+
+        //icono en el action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setIcon(R.mipmap.ic_launcher); agrega el icono al lado de la letra. Para tenerlo
     }
 
     //Verifica si estan todos los valores, si no lanza una alerta
