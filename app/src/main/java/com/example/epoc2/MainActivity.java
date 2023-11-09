@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tieneNull(String string, String frase) {
         //Verifica si no completaste alguna celda
-        if (string.length() == 0) {
+        if (string.length() == 0 ) {
             //Aca esta la advertencia si esta en falta.
             Toast.makeText(this, frase, Toast.LENGTH_LONG).show();
         }
@@ -117,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (calcula(valor1 ,valor2) >= 10 && calcula(valor1 ,valor2) < 20) {
             textView2.setText(String.valueOf("Elevado"));
         } else if (calcula(valor1 ,valor2) >= 21 && calcula(valor1 ,valor2) <= 40) {
-            textView2.setText(String.valueOf("Peligroso"));
+            textView2.setText(String.valueOf("ALto"));
         } else {
-            textView2.setText(String.valueOf("Muy peligroso"));
+            textView2.setText(String.valueOf("Muy Alto"));
         }
     }
 
