@@ -2,10 +2,12 @@ package com.example.epoc2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,7 +85,17 @@ public class MainActivity extends AppCompatActivity {
             this.calcular();
             this.frase();
             idMedidor.setValue(calcula(Integer.parseInt(cig),Integer.parseInt(anio)));
+            this.cerrarTeclado();
         }
+    }
+
+    private void cerrarTeclado() {
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(view.getWindowToken(), 0 );
+        }
+
     }
 
     // hace el calculo dado
@@ -92,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
 
         textView.setText(String.valueOf(calcula(valor1,valor2)));
-
     }
 
     // resuelve el calulo
@@ -111,13 +122,13 @@ public class MainActivity extends AppCompatActivity {
     public void frase(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-        // Verificar el rango del resultado y mostrar el mensaje apropiado
+        // Verificar el rango del resultado y muestra el mensaje apropiado
         if (this.calcula(valor1 ,valor2) < 10) {
             textView2.setText(String.valueOf("¡Bien!)"));
         } else if (calcula(valor1 ,valor2) >= 10 && calcula(valor1 ,valor2) < 20) {
             textView2.setText(String.valueOf("Elevado"));
         } else if (calcula(valor1 ,valor2) >= 21 && calcula(valor1 ,valor2) <= 40) {
-            textView2.setText(String.valueOf("ALto"));
+            textView2.setText(String.valueOf("Alto"));
         } else {
             textView2.setText(String.valueOf("Muy Alto"));
         }
