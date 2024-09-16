@@ -16,8 +16,12 @@ import android.widget.Toast;
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
 import com.ekn.gruzer.gaugelibrary.Range;
 
+import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
+import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios.*;
 
 public class MainActivity extends AppCompatActivity {
+
+    private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
 
     private EditText textNroCig, textNroAnio;
     private TextView textView, textView2;
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if(cig.length() != 0 && anio.length() !=0){
             this.calcular();
             this.frase();
-            idMedidor.setValue(calcula(Integer.parseInt(cig),Integer.parseInt(anio)));
+            idMedidor.setValue(calcular.calcula(Integer.parseInt(cig),Integer.parseInt(anio)));
             this.cerrarTeclado();
         }
     }
@@ -104,13 +108,11 @@ public class MainActivity extends AppCompatActivity {
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
 
-        textView.setText(String.valueOf(calcula(valor1,valor2)));
+        textView.setText(String.valueOf(calcular.calcula(valor1,valor2)));
     }
 
     // resuelve el calulo
-    private float calcula(int v1, int v2){
-        return (v1 * v2) / 20;
-    }
+
 
     public void tieneNull(String string, String frase) {
         //Verifica si no completaste alguna celda
@@ -120,15 +122,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void frase(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
         // Verificar el rango del resultado y muestra el mensaje apropiado
-        if (this.calcula(valor1 ,valor2) < 10) {
-            textView2.setText(String.valueOf("Bien)"));
-        } else if (calcula(valor1 ,valor2) >= 10 && calcula(valor1 ,valor2) < 20) {
+        if (calcular.calcula(valor1 ,valor2) < 10) {
+            textView2.setText(String.valueOf("Bien"));
+        } else if (calcular.calcula(valor1 ,valor2) >= 10 && calcular.calcula(valor1 ,valor2) < 20) {
             textView2.setText(String.valueOf("Elevado"));
-        } else if (calcula(valor1 ,valor2) >= 21 && calcula(valor1 ,valor2) <= 40) {
+        } else if (calcular.calcula(valor1 ,valor2) >= 21 && calcular.calcula(valor1 ,valor2) <= 40) {
             textView2.setText(String.valueOf("Alto"));
         } else {
             textView2.setText(String.valueOf("Muy Alto"));
