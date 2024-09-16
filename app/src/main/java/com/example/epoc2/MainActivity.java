@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
         // Verificar el rango del resultado y muestra el mensaje apropiado
         if (this.calcula(valor1 ,valor2) < 10) {
-            textView2.setText(String.valueOf("¡Bien!)"));
+            textView2.setText(String.valueOf("Bien)"));
         } else if (calcula(valor1 ,valor2) >= 10 && calcula(valor1 ,valor2) < 20) {
             textView2.setText(String.valueOf("Elevado"));
         } else if (calcula(valor1 ,valor2) >= 21 && calcula(valor1 ,valor2) <= 40) {
