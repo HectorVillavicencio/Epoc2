@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
     public void calcular(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-
         textView.setText(String.valueOf(calcular.calcula(valor1,valor2)));
     }
 

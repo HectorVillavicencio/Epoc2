@@ -19,4 +19,5 @@ public class TieneNull {
             Toast.makeText(this.mainActivity, frase, Toast.LENGTH_LONG).show();
         }
     }
+
 }
