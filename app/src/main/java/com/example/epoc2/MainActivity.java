@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //aca empiezo ahcer el medidor
         idMedidor = findViewById(R.id.idMedidor);
 
-        tieneNull = new TieneNull();
+        tieneNull = new TieneNull(this);
 
         Range1 = new com.ekn.gruzer.gaugelibrary.Range();
         Range2 = new com.ekn.gruzer.gaugelibrary.Range();

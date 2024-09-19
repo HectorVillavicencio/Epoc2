@@ -8,7 +8,7 @@ public class TieneNull {
 
     private MainActivity mainActivity;
 
-    public void mianActivity(MainActivity mainActivity){
+    public TieneNull(MainActivity mainActivity){
         this.mainActivity = mainActivity;
     }
 
