@@ -14,16 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
-import com.ekn.gruzer.gaugelibrary.Range;
 import com.example.epoc2.evaluator.Frase;
-
+import com.example.epoc2.evaluator.TieneNull;
 
 import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
 import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios.*;
 
 public class MainActivity extends AppCompatActivity {
-    private Frase frase = new Frase();
 
+    private TieneNull tieneNull;
+
+    private Frase frase = new Frase();
     private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
 
     private EditText textNroCig, textNroAnio;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setIcon(R.mipmap.ic_launcher); agrega el icono al lado de la letra. Para tenerlo
         //aca empiezo ahcer el medidor
         idMedidor = findViewById(R.id.idMedidor);
+
+        tieneNull = new TieneNull(this);
 
         Range1 = new com.ekn.gruzer.gaugelibrary.Range();
         Range2 = new com.ekn.gruzer.gaugelibrary.Range();
@@ -80,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
         String anio = textNroAnio.getText().toString();
 
         //notificacion de error
-        this.tieneNull(cig, "Falta la cantidad de cigarrillos diarios");
-        this.tieneNull(anio, "Falta la cantidad de años que fumas");
+        tieneNull.tieneNull(cig, "Falta la cantidad de cigarrillos diarios");
+        tieneNull.tieneNull(anio, "Falta la cantidad de años que fumas");
 
         this.calculaSiTieneTodosLosDatos(cig,anio);
 
@@ -113,17 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText(String.valueOf(calcular.calcula(valor1,valor2)));
     }
-
-    // resuelve el calulo
-
-
-    public void tieneNull(String string, String frase) {
-        if (string.length() == 0 ) {
-            //Aca esta la advertencia si esta en falta.
-            Toast.makeText(this, frase, Toast.LENGTH_LONG).show();
-        }
-    }
-
 
     public void frase(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
