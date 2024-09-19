@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TieneNull tieneNull;
 
-    private Frase frase = new Frase();
+    private Frase frase = new Frase(this);
     private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
 
     private EditText textNroCig, textNroAnio;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //aca empiezo ahcer el medidor
         idMedidor = findViewById(R.id.idMedidor);
 
-        tieneNull = new TieneNull(this);
+        tieneNull = new TieneNull();
 
         Range1 = new com.ekn.gruzer.gaugelibrary.Range();
         Range2 = new com.ekn.gruzer.gaugelibrary.Range();
