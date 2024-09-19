@@ -15,11 +15,14 @@ import android.widget.Toast;
 
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
 import com.ekn.gruzer.gaugelibrary.Range;
+import com.example.epoc2.evaluator.Frase;
+
 
 import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
 import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios.*;
 
 public class MainActivity extends AppCompatActivity {
+    private Frase frase = new Frase();
 
     private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
 
@@ -115,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void tieneNull(String string, String frase) {
-        //Verifica si no completaste alguna celda
         if (string.length() == 0 ) {
             //Aca esta la advertencia si esta en falta.
             Toast.makeText(this, frase, Toast.LENGTH_LONG).show();
@@ -126,16 +128,9 @@ public class MainActivity extends AppCompatActivity {
     public void frase(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-        // Verificar el rango del resultado y muestra el mensaje apropiado
-        if (calcular.calcula(valor1 ,valor2) < 10) {
-            textView2.setText(String.valueOf("Bien"));
-        } else if (calcular.calcula(valor1 ,valor2) >= 10 && calcular.calcula(valor1 ,valor2) < 20) {
-            textView2.setText(String.valueOf("Elevado"));
-        } else if (calcular.calcula(valor1 ,valor2) >= 21 && calcular.calcula(valor1 ,valor2) <= 40) {
-            textView2.setText(String.valueOf("Alto"));
-        } else {
-            textView2.setText(String.valueOf("Muy Alto"));
-        }
+        double resultado = calcular.calcula(valor1 ,valor2);
+        textView2.setText(String.valueOf(frase.frase(resultado)));
+
     }
 
 }
