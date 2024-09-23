@@ -10,7 +10,7 @@ public class Frase {
 
     public String frase(double resultado) {
         if (resultado < 10) {
-            return ("Bien");
+            return ("Bajo");
         } else if (resultado >= 10 && resultado < 20) {
             return ("Elevado");
         } else if (resultado >= 21 && resultado <= 40) {
