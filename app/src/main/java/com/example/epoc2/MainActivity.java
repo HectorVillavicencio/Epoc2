@@ -3,22 +3,27 @@ package com.example.epoc2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
+import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
 import com.example.epoc2.evaluator.Frase;
 import com.example.epoc2.evaluator.TieneNull;
-
-import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
-import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         tieneNull = new TieneNull(this);
 
+
+
+        // Botón de ayuda (ImageButton) que muestra la ventana emergente
+        ImageButton helpButton = findViewById(R.id.imageButton);
+        helpButton.setOnClickListener(v -> showPopupWindow(v));
+
+
         Range1 = new com.ekn.gruzer.gaugelibrary.Range();
         Range2 = new com.ekn.gruzer.gaugelibrary.Range();
         Range3 = new com.ekn.gruzer.gaugelibrary.Range();
@@ -75,6 +87,33 @@ public class MainActivity extends AppCompatActivity {
         idMedidor.addRange(Range4);
 
 
+    }
+
+    // Método para mostrar la ventana emergente
+    private void showPopupWindow(View view) {
+        // Inflar el layout del popup
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.epocpopupwindow, null);
+
+        // Crear el PopupWindow
+        final PopupWindow popupWindow = new PopupWindow(popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true);
+
+        // Mostrar el PopupWindow
+        popupWindow.showAtLocation(view, 0, 0, 0);
+
+        // Botón de cerrar en el Popup
+        Button closeButton = popupView.findViewById(R.id.close_button);
+        closeButton.setOnClickListener(v -> popupWindow.dismiss());
+
+        // Botón de Más Información que abre el navegador
+        Button moreInfoButton = popupView.findViewById(R.id.more_info_button);
+        moreInfoButton.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.ar"));
+            startActivity(browserIntent);
+        });
     }
 
     //Verifica si estan todos los valores, si no lanza una alerta
