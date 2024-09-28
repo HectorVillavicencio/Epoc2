@@ -2,5 +2,9 @@
     <string name="titulo">Control de EPOC</string>
     <string name="cigarillos">Numero de cigarrillos diarios</string>
     <string name="anios">Años fumando</string>
+    <string name="titulopopup">Enfermedad pulmonar obstructiva crónica (EPOC)</string>
+    <string name="descripcion">Es una enfermedad pulmonar común. La EPOC causa dificultad para respirar.Hay dos formas principales de EPOC: Bronquitis crónica, la cual implica una tos prolongada con moco
+y enfisema, el cual implica un daño a los pulmones con el tiempo.La mayoría de las personas con EPOC tienen una combinación de ambas afecciones.</string>
+
 
 </resources>

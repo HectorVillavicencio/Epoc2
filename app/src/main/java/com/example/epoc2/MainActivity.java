@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
 import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
 import com.example.epoc2.evaluator.Frase;
+import com.example.epoc2.evaluator.FraseHandler;
 import com.example.epoc2.evaluator.TieneNull;
+import com.example.epoc2.popup.PopupHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private TieneNull tieneNull;
 
-    private Frase frase = new Frase(this);
+    private Frase frase = new Frase();
     private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
 
     private EditText textNroCig, textNroAnio;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private com.ekn.gruzer.gaugelibrary.Range Range1, Range2, Range3, Range4;
     private int SetearGrafica;
 
+    private PopupHelper popupHelper;
+    private FraseHandler fraseHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         textNroAnio = findViewById(R.id.textNroAnio);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
+        popupHelper = new PopupHelper(this);
+        fraseHandler = new FraseHandler(frase, calcular);
 
         //icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -59,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Botón de ayuda (ImageButton) que muestra la ventana emergente
         ImageButton helpButton = findViewById(R.id.imageButton);
-        helpButton.setOnClickListener(v -> showPopupWindow(v));
+        helpButton.setOnClickListener(v -> popupHelper.showPopupWindow(v));
 
 
         Range1 = new com.ekn.gruzer.gaugelibrary.Range();
@@ -89,33 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Método para mostrar la ventana emergente
-    private void showPopupWindow(View view) {
-        // Inflar el layout del popup
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.epocpopupwindow, null);
-
-        // Crear el PopupWindow
-        final PopupWindow popupWindow = new PopupWindow(popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                true);
-
-        // Mostrar el PopupWindow
-        popupWindow.showAtLocation(view, 0, 0, 0);
-
-        // Botón de cerrar en el Popup
-        Button closeButton = popupView.findViewById(R.id.close_button);
-        closeButton.setOnClickListener(v -> popupWindow.dismiss());
-
-        // Botón de Más Información que abre el navegador
-        Button moreInfoButton = popupView.findViewById(R.id.more_info_button);
-        moreInfoButton.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.ar"));
-            startActivity(browserIntent);
-        });
-    }
-
     //Verifica si estan todos los valores, si no lanza una alerta
     public void verificar(View view){
         String cig = textNroCig.getText().toString();
@@ -133,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(cig.length() != 0 && anio.length() !=0){
             this.calcular();
-            this.frase();
+            this.generarFrase();
             idMedidor.setValue(calcular.calcula(Integer.parseInt(cig),Integer.parseInt(anio)));
             this.cerrarTeclado();
         }
@@ -155,12 +135,10 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(String.valueOf(calcular.calcula(valor1,valor2)));
     }
 
-    public void frase(){
+    public void generarFrase() {
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-        double resultado = calcular.calcula(valor1 ,valor2);
-        textView2.setText(String.valueOf(frase.frase(resultado)));
-
+        fraseHandler.generarFrase(valor1, valor2, textView2);
     }
 
 }

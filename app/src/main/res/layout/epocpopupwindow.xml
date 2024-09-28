@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D6D6D6">
+    >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="match_parent"
-          android:layout_height="200dp"
+          android:layout_height="350dp"
           android:orientation="vertical"
           android:padding="20dp"
           android:background="@drawable/rounded_corners">
@@ -15,7 +15,7 @@
               android:id="@+id/popup_title"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Título del Popup"
+              android:text="@string/titulopopup"
               android:textSize="20sp"
               android:textStyle="bold"
               android:layout_gravity="center"/>
@@ -24,7 +24,7 @@
               android:id="@+id/popup_text"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Este es el texto del Popup Window."
+              android:text="@string/descripcion"
               android:layout_marginTop="10dp"
               android:layout_gravity="center"/>
 

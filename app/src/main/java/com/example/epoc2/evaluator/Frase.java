@@ -4,10 +4,6 @@ import com.example.epoc2.MainActivity;
 public class Frase {
     private MainActivity mainActivity;
 
-    public Frase(MainActivity mainActivity){
-        this.mainActivity = mainActivity;
-    }
-
     public String frase(double resultado) {
         if (resultado < 10) {
             return ("Bajo");
