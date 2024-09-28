@@ -3,27 +3,17 @@ package com.example.epoc2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.ekn.gruzer.gaugelibrary.HalfGauge;
-import com.example.epoc2.evaluator.CalculatorCigarretesAndAnios;
-import com.example.epoc2.evaluator.Frase;
+import com.example.epoc2.evaluator.Calculatehealth;
+import com.example.epoc2.evaluator.RiskLevelClassifier;
 import com.example.epoc2.evaluator.FraseHandler;
 import com.example.epoc2.evaluator.TieneNull;
 import com.example.epoc2.popup.PopupHelper;
@@ -32,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TieneNull tieneNull;
 
-    private Frase frase = new Frase();
-    private CalculatorCigarretesAndAnios calcular = new CalculatorCigarretesAndAnios();
+    private RiskLevelClassifier frase = new RiskLevelClassifier();
+    private Calculatehealth calcular = new Calculatehealth();
 
     private EditText textNroCig, textNroAnio;
     private TextView textView, textView2;
@@ -112,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
     private void calculaSiTieneTodosLosDatos(String cig, String anio) {
 
         if(cig.length() != 0 && anio.length() !=0){
-            this.calcular();
-            this.generarFrase();
-            idMedidor.setValue(calcular.calcula(Integer.parseInt(cig),Integer.parseInt(anio)));
+            this.displayCalculationResult();
+            this.generatephrase();
+            idMedidor.setValue(calcular.calculatehealth(Integer.parseInt(cig),Integer.parseInt(anio)));
             this.cerrarTeclado();
         }
     }
@@ -129,16 +119,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // hace el calculo dado
-    public void calcular(){
+    public void displayCalculationResult(){
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-        textView.setText(String.valueOf(calcular.calcula(valor1,valor2)));
+        textView.setText(String.valueOf(calcular.calculatehealth(valor1,valor2)));
     }
 
-    public void generarFrase() {
+    public void generatephrase() {
         int valor1 = Integer.parseInt(textNroCig.getText().toString());
         int valor2 = Integer.parseInt(textNroAnio.getText().toString());
-        fraseHandler.generarFrase(valor1, valor2, textView2);
+        fraseHandler.generatephrase(valor1, valor2, textView2);
     }
 
 }

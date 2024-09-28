@@ -1,9 +1,9 @@
 package com.example.epoc2.evaluator;
 
-public class CalculatorCigarretesAndAnios {
+public class Calculatehealth {
 
     //Resuelve el calculo
-    public float calcula(int v1, int v2){
+    public float calculatehealth(int v1, int v2){
 
         return (v1 * v2) / 20;
     }
