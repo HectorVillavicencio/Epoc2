@@ -16,6 +16,7 @@ import com.example.epoc2.evaluator.Calculatehealth;
 import com.example.epoc2.evaluator.RiskLevelClassifier;
 import com.example.epoc2.evaluator.FraseHandler;
 import com.example.epoc2.evaluator.TieneNull;
+import com.example.epoc2.keyboard.KeyboardManager;
 import com.example.epoc2.popup.PopupHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PopupHelper popupHelper;
     private FraseHandler fraseHandler;
+    private KeyboardManager keyboardManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         textView2 = findViewById(R.id.textView2);
         popupHelper = new PopupHelper(this);
         fraseHandler = new FraseHandler(frase, calcular);
+        keyboardManager = new KeyboardManager(this);
 
         //icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Verifica si estan todos los valores, si no lanza una alerta
-    public void verificar(View view){
+    public void verify(View view){
         String cig = textNroCig.getText().toString();
         String anio = textNroAnio.getText().toString();
 
@@ -95,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
         tieneNull.tieneNull(cig, "Falta la cantidad de cigarrillos diarios");
         tieneNull.tieneNull(anio, "Falta la cantidad de años que fumas");
 
-        this.calculaSiTieneTodosLosDatos(cig,anio);
+        this.validateDataAndCalculate(cig,anio);
 
     }
 
-    private void calculaSiTieneTodosLosDatos(String cig, String anio) {
+    private void validateDataAndCalculate(String cig, String anio) {
 
         if(cig.length() != 0 && anio.length() !=0){
             this.displayCalculationResult();
@@ -111,11 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void cerrarTeclado() {
         View view = this.getCurrentFocus();
-        if(view != null){
-            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            inm.hideSoftInputFromWindow(view.getWindowToken(), 0 );
-        }
-
+        keyboardManager.closeKeyboard(view);
     }
 
     // hace el calculo dado
