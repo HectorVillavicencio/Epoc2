@@ -1,5 +1,5 @@
 <resources>
-    <string name="titulo"></string>
+    <string name="titulo">Control de EPOC</string>
     <string name="barra">Riesgo de EPOC</string>
     <string name="cigarillos">Numero de cigarrillos diarios</string>
     <string name="anios">Años fumando</string>
